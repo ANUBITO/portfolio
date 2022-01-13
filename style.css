@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, p, a {
+    user-select: none;
+}
+
+@font-face {
+    font-family: thicksolid;
+    src: url(unisans.otf);
+}
+
+html, body {
+    height: 100vh;
+    overflow: hidden;
+    /* scroll-behavior: smooth; */
+    cursor: url('cursor.png'), auto;
+}
+
+body {
+    background-color: rgb(70, 0, 70);
+}
+
+.container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    
+    /* scroll-snap-points-y: repeat(100vh); */
+    /* scroll-snap-type: y mandatory; */
+}
+
+
+
+.item {
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    background-color: rgb(70, 0, 70);
+    display: none;
+    /* transform: translateY(-100%); */
+    transition: all 1000ms ease-in-out;
+}
+
+.firstitem {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.text {
+    font-size: 300px;
+}
+
+.active {
+    display: block;
+    transform: translateY(0%);
+}
+
+
+.deactivedown {
+    display: block;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 1000ms ease-in-out;
+}
+
+.deactiveup {
+    display: block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 1000ms ease-in-out;
+}
+
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #000000;
+}
+
+.hide1 {
+    opacity: 0;
+    transition: all 800ms ease-in-out;
+    transform: translateX(-100px);
+}
+
+.hide2 {
+    opacity: 0;
+    transition: all 1200ms ease-in-out;
+}
+
+.hide3 {
+    opacity: 0;
+    transition: all 1600ms ease-in-out;
+    transform: translateX(100px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.maintitle {
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+    font-size: 120px;
+    animation: titleanim 500ms cubic-bezier(0.87, 0, 0.85, 0.54);
+    font-family: thicksolid;
+    color: white;
+    letter-spacing: 2px;
+    word-spacing: 20px;
+}
+
+.blob {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    animation: blobanim 500ms 500ms forwards;
+}
+
+.blobwrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: blobopacity 500ms 500ms forwards;
+}
+
+.blobwrap:nth-child(2) {
+    filter: blur(30px);
+}
+
+
+@keyframes titleanim {
+    0% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes blobanim {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(2.6);
+    }
+}
+
+@keyframes blobopacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.arrowwrap {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    animation: arrowanim 5000ms infinite;
+    cursor: pointer;
+}
+
+.arrow {
+    width: 100%;
+    height: 100%;
+    fill: white;
+}
+
+@keyframes arrowanim {
+    0% {
+        transform: translateY(0%);
+    }
+
+    50% {
+        transform: translateY(-30%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.workwrap {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.workcontainer {
+    width: 30%;
+    height: 50%;
+}
+
+.workimage {
+    width: 100%;
+    height: 80%;
+    background-color: green;
+}
+
+.worktext {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.burger {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transform: translateY(0%);
+    z-index: 2;
+    margin-right: 15px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+
+.burgeractive {
+    transform: scale(0.9) translateX(-30%);
+    border-radius: 30px;
+    filter: blur(3px);
+}
+
+.burgerbody {
+    background-color: rgb(15, 0, 15);
+}
+
+.wrapper-menu {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 500ms ease-out;
+  }
+  
+  .wrapper-menu.open {
+    transform: rotate(-45deg);  
+  }
+  
+  .line-menu {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 100%;
+    height: 6px;
+  }
+  
+  .line-menu.half {
+    width: 50%;
+  }
+  
+  .line-menu.start {
+    transition: transform 500ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+    transform-origin: right;
+  }
+  
+  .open .line-menu.start {
+    transform: rotate(-90deg) translateX(3px);
+  }
+  
+  .line-menu.end {
+    align-self: flex-end;
+    transition: transform 500ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+    transform-origin: left;
+  }
+  
+  .open .line-menu.end {
+    transform: rotate(-90deg) translateX(-3px);
+  }
+
+.scrollspy {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 15px;
+    width: 50px;
+    height: 30%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 15px;
+    transition: all 500ms ease-in-out;
+    cursor: pointer;
+}
+
+.circle:hover {
+    transform: scale(1.5);
+}
+  
+.spyactive {
+    border: 5px solid rgb(0, 0, 0);
+    transform: scale(1.5);
+}
